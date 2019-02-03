@@ -1,16 +1,31 @@
 package com.huawei.todo.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="user")
 public class User {
 
-	
+	@Id
+	@GeneratedValue
 	private Long id;
 	
+	@Column(name="name")
 	private String name;
 	
+	
+	@Column(unique=true, nullable=false)
 	private String email;
 	
+	@Column
 	private String password;
 	
+	@Transient
 	private String confirmedPassword;
 
 	public String getName() {

@@ -17,7 +17,6 @@ import com.huawei.todo.service.UserService;
 
 @RestController
 @RequestMapping("/api/user")
-
 @CrossOrigin("*")
 public class UserRestController {
 
@@ -33,10 +32,16 @@ public class UserRestController {
         return userService.create(user);
     }
 	
-	@GetMapping(path = {"/{id}"})
+	@GetMapping(path = {"/{id}"},consumes = "application/json")
     public Optional<User> findOne(@PathVariable("id") Long id){
         return userService.findById(id);
     }
+	
+	@GetMapping(path = {"/email/{email}"})
+    public User findUserByEmail(@PathVariable("email") String  email){
+        return userService.findByUser(email);
+    }
+	
 	
 	
 }

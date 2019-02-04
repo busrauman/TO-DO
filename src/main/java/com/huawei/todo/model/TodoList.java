@@ -11,13 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="todo")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TodoList {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
+	
 	@Column
 	private String name;
 	

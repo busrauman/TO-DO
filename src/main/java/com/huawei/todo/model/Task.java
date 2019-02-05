@@ -12,8 +12,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="task")
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Task {
 	
 	@Id

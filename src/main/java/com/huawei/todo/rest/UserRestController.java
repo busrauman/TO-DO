@@ -20,28 +20,39 @@ import com.huawei.todo.service.UserService;
 @CrossOrigin("*")
 public class UserRestController {
 
-	
 	@Autowired
 	private UserService userService;
-	  @Autowired
-	  private PasswordEncoder bCryptPasswordEncoder;
-	
+	@Autowired
+	private PasswordEncoder bCryptPasswordEncoder;
+
 	@PostMapping(consumes = "application/json")
-    public User create(@RequestBody User user){
+	public User create(@RequestBody User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userService.create(user);
-    }
-	
-	@GetMapping(path = {"/{id}"},consumes = "application/json")
-    public Optional<User> findOne(@PathVariable("id") Long id){
-        return userService.findById(id);
-    }
-	
-	@GetMapping(path = {"/email/{email}"})
-    public User findUserByEmail(@PathVariable("email") String  email){
-        return userService.findByUser(email);
-    }
-	
-	
-	
+		return userService.create(user);
+	}
+
+	@GetMapping(path = { "/{id}" }, consumes = "application/json")
+	public Optional<User> findOne(@PathVariable("id") Long id) {
+		return userService.findById(id);
+	}
+
+	@GetMapping(path = { "/email/{email}" })
+	public User findUserByEmail(@PathVariable("email") String email) {
+		return userService.findByUser(email);
+	}
+
+	@PostMapping(path = "/login", produces = "application/json", consumes = "application/json")
+	public User login(@RequestBody User user) {
+		String msg;
+		User loggined = userService.findByUser(user.getEmail().trim());
+		if (loggined != null
+		&& loggined.getPassword().equals(bCryptPasswordEncoder.encode(user.getPassword()))) {
+		} else {
+			loggined.setLoginMessage("Bad Credentials");
+			loggined.setId(null);
+		}
+		loggined.setPassword("");
+		return loggined;
+	}
+
 }

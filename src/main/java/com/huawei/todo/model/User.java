@@ -27,6 +27,23 @@ public class User {
 	
 	@Transient
 	private String confirmedPassword;
+	
+	@Transient
+	private String loginMessage;
+	
+	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getLoginMessage() {
+		return loginMessage;
+	}
+
+	public void setLoginMessage(String loginMessage) {
+		this.loginMessage = loginMessage;
+	}
 
 	public String getName() {
 		return name;

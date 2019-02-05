@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -28,6 +29,7 @@ public class TodoList {
 	@Column(name="done")
 	private Boolean isDone = false;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="owner_id")
 	private User owner;
@@ -35,6 +37,7 @@ public class TodoList {
 	@Column(name="deleted")
 	private Boolean isDeleted = false;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="todo")
 	private List<Task> taskList  = new ArrayList<>();
 
